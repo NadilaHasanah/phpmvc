@@ -1,7 +1,7 @@
 <?php
 
-class Siswa_model {
-    private $table = 'siswa';
+class Guru_model {
+    private $table = 'guru';
     private $db;
 
     public function __construct() {
@@ -9,35 +9,33 @@ class Siswa_model {
     }
     
 
-    public function getAllSiswa(){
+    public function getAllGuru(){
         $this->db->query('SELECT * FROM ' . $this->table);
         return $this->db->resultSet();
     }
 
-    public function getSiswaById($id) {
+    public function getGuruById($id) {
         $this->db->query('SELECT * FROM ' . $this->table . ' WHERE id=:id');
         $this->db->bind('id', $id);
         return $this->db->single();
     }
 
-    public function tambahDataSiswa($data)
+    public function tambahDataGuru($data)
     {
-        $query = "INSERT INTO siswa
+        $query = "INSERT INTO guru
                     VALUES
-                  ('', :nama, :kelas, :email, :jurusan)";
+                  ('', :nama, :mapel)";
         
         $this->db->query($query);
         $this->db->bind('nama', $data['nama']);
-        $this->db->bind('kelas', $data['kelas']);
-        $this->db->bind('email', $data['email']);
-        $this->db->bind('jurusan', $data['jurusan']);
+        $this->db->bind('mapel', $data['mapel']);
 
         $this->db->execute();
 
         return $this->db->rowCount();
     }
-    public function hapusDataSiswa($id) {
-        $query = "DELETE FROM siswa WHERE id = :id";
+    public function hapusDataGuru($id) {
+        $query = "DELETE FROM guru WHERE id = :id";
         $this->db->query($query);
         $this->db->bind('id', $id);
 
@@ -47,20 +45,16 @@ class Siswa_model {
 
     }
 
-    public function ubahDataSiswa($data)
+    public function ubahDataGuru($data)
     {
-        $query = "UPDATE siswa SET
+        $query = "UPDATE guru SET
                     nama = :nama,
-                    kelas = :kelas,
-                    email = :email,
-                    jurusan = :jurusan
+                    mapel = :mapel
                   WHERE id = :id";
         
         $this->db->query($query);
         $this->db->bind('nama', $data['nama']);
-        $this->db->bind('kelas', $data['kelas']);
-        $this->db->bind('email', $data['email']);
-        $this->db->bind('jurusan', $data['jurusan']);
+        $this->db->bind('mapel', $data['mapel']);
         $this->db->bind('id', $data['id']);
 
         $this->db->execute();
@@ -68,9 +62,9 @@ class Siswa_model {
         return $this->db->rowCount();
     }
 
-    public function cariDataSiswa() {
+    public function cariDataGuru() {
         $keyword = $_POST['keyword'];
-        $query = "SELECT * FROM siswa WHERE nama LIKE :keyword";
+        $query = "SELECT * FROM guru WHERE nama LIKE :keyword";
         $this->db->query($query);
         $this->db->bind('keyword', "%$keyword%");
         return $this->db->resultSet();

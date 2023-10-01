@@ -1,49 +1,48 @@
 <div class="container mt-3">
 
-  <div class="row">
-    <div class="col-lg-6">
-      <?php Flasher::flash(); ?>
-    </div>
-  </div>
-
-  <div class="row mb-3">
-    <div class="col-lg-6">
-    <button type="button" class="btn btn-primary tombolTambahData" data-toggle="modal" data-target="#formModal">
-                Tambah Data Siswa
-    </button>
-    </div>
-  </div>
-
-  <div class="row mb-3">
-    <div class="col-lg-6">
-    <form action="<?= BASEURL; ?>/siswa/cari" method="post">
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="cari data siswa.." name="keyword" id="keyword" autocomplete="off">
-        <div class="input-group-append">
-        <button class="btn btn-primary" type="submit" id="tombolCari">Cari</button>
+    <div class="row">
+      <div class="col-lg-6">
+        <?php Flasher::flash(); ?>
       </div>
-      </div>
-    </form>
     </div>
-  </div>
+
+    <div class="row mb-3">
+      <div class="col-lg-6">
+        <button type="button" class="btn btn-primary tombolTambahData" data-toggle="modal" data-target="#formModal">
+          Tambah Data Siswa
+        </button>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-lg-6">
+        <form action="<?= BASEURL; ?>/siswa/cari" method="post">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="cari data siswa..." name="keyword" id="keyword" autocomplete="off">
+            <div class="input-group-append">
+              <button class="btn btn-primary" type="submit" id="tombolCari">Cari</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
 
     <div class="row">
         <div class="col-lg-6">
-            <h3>Daftar Siswa</h3>
-            <ul class="list-group">
+          <h3>Daftar Siswa</h3>
+          <ul class="list-group">
             <?php foreach( $data['siswa'] as $siswa ) : ?>
-                <li class="list-group-item">
-                    <?= $siswa['nama']; ?>
-                    <a href="<?= BASEURL; ?>/siswa/hapus/<?= $siswa['id']; ?>" class="badge badge-danger float-right ml-1" onclick="return confirm('yakin?');">hapus</a>
-                    <a href="<?= BASEURL; ?>/siswa/ubah/<?= $siswa['id']; ?>" class="badge badge-warning float-right ml-1 tampilModalUbah" data-toggle="modal" data-target="#formModal" data-id="<?= $siswa['id']; ?>">ubah</a>
-                    <a href="<?= BASEURL; ?>/siswa/detail/<?= $siswa['id']; ?>" class="badge badge-primary float-right ml-1">detail</a>
-                </li>
-                <?php endforeach; ?>
-            </ul>
-                
+              <li class="list-group-item">
+                  <?= $siswa['nama']; ?>
+                  <a href="<?= BASEURL; ?>/siswa/hapus/<?= $siswa['id']; ?>" class="badge badge-danger float-right ml-1" onclick="return confirm('yakin?');">hapus</a>
+                  <a href="<?= BASEURL; ?>/siswa/ubah/<?= $siswa['id']; ?>" class="badge badge-warning float-right tampilModalUbah ml-1" data-toggle="modal" data-target="#formModal" data-id="<?= $siswa['id']; ?>">ubah</a>
+                  <a href="<?= BASEURL; ?>/siswa/detail/<?= $siswa['id']; ?>" class="badge badge-primary float-right ml-1">detail</a>
+              </li>
+            <?php endforeach; ?>
+          </ul>      
         </div>
+      </div>
     </div>
-</div>
 
 <!-- Modal -->
 <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="judulModal" aria-hidden="true">
